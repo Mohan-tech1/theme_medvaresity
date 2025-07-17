@@ -1,0 +1,47 @@
+<div id="admin-hamburger">&#9776;</div>
+
+<nav id="admin-nav-tree" class="admin-sidebar" role="navigation" aria-label="Admin menu">
+
+    <div class="admin-sidebar-close" tabindex="0" role="button" aria-label="Close admin sidebar" aria-controls="admin-nav-tree">
+            <span class="sr-only">Close</span>
+        <i class="icon fa fa-times" aria-hidden="true"></i>
+    </div>
+    <ul class="tree-menu">
+        {{#sidebarnavigation}}
+            <li class="tree-item has-children">
+            {{#haschildren}}
+                <span class="toggle" tabindex="0">{{text}}</span>
+                    <ul class="sub-tree">
+                        {{#children}}
+                            <li class="tree-item {{#children}}has-children{{/children}}">
+                                {{#haschildren}}
+                                    <span class="toggle" tabindex="0">{{#url}}<a href="{{url}}">{{text}}</a>{{/url}} {{^url}}{{text}}{{/url}}</span>
+                                    <ul class="sub-sub-tree">
+                                        {{#children}}
+                                        <li class="tree-item">
+                                            <a href="{{url}}">{{text}}</a>
+                                        </li>
+                                        {{/children}}
+                                    </ul>
+                                {{/haschildren}}
+                                {{^haschildren}}
+                                    <a href="{{url}}" class="tree-item">{{text}}</a>
+                                {{/haschildren}}
+                            </li>
+                        {{/children}}
+                    </ul>
+                {{/haschildren}}
+                {{^haschildren}}
+                    <a href="{{url}}" class="tree-item">{{text}}</a>
+                {{/haschildren}}
+        
+            </li>
+        {{/sidebarnavigation}}
+    </ul>
+</nav>
+
+{{#js}}
+    require(['theme_medvaresity/admin_drawers'], function(adminDrawers) {
+        adminDrawers.init();
+    });
+{{/js}}
